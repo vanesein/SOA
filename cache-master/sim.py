@@ -22,7 +22,7 @@ l = { "CLOCK": CLOCK,
 }
 
 #ss=[5, 30, 50, 70, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500]
-ss=[2, 4, 6, 8, 10, 12, 14, 16]
+ss=[]
 #ss=[]
 slices = [1, 8, 30, 120]
 
@@ -127,7 +127,7 @@ def inicialize_cache():
     path_size = 0
     min_file_size = 0
     max_file_size = 0
-    n_array = 2    
+    n_array = 5    
     for the_path, dirs, files in os.walk(traces):
         for fil in files:
             filename = os.path.join(the_path, fil)
@@ -138,9 +138,9 @@ def inicialize_cache():
                 min_file_size = path_size
             if(path_size > max_file_size):
                 max_file_size = path_size   
-            if (path_size > 1024):
-                min_file_size = min_file_size/1024    
-                max_file_size = max_file_size/1024    
+        if (path_size > 1024):
+            min_file_size = min_file_size/1024    
+            max_file_size = max_file_size/1024    
                 
     for i in xrange(n_array):        
         ss.append(random.randint(min_file_size, max_file_size))
@@ -265,20 +265,20 @@ def range_hitrate_request_slices(algorithm):
 if __name__ == "__main__":
     #rename_files()
 
-#    doitall()
-#
-#    maxhit, maxtp, minhit, mintp = range_hitrate_request()
-    min_cache, max_cache = range_cache()
-#
-#    create_cache_hitrate_gnu(minhit, maxhit, min_cache, max_cache)
-#    plot_cache_vs_hitrate()
-#
-#    create_cache_request_gnu(mintp, maxtp, min_cache, max_cache)
-#    plot_cache_vs_request()
-
-
     inicialize_cache()
+    doitall()
+
+    maxhit, maxtp, minhit, mintp = range_hitrate_request()
+    min_cache, max_cache = range_cache()
+
+    create_cache_hitrate_gnu(minhit, maxhit, min_cache, max_cache)
+    plot_cache_vs_hitrate()
+
+    create_cache_request_gnu(mintp, maxtp, min_cache, max_cache)
+    plot_cache_vs_request()
+
     doitall2()
+
     for algorithm in algorithms_selected:
         maxhit, maxtp, minhit, mintp = range_hitrate_request_slices(algorithm)
         create_cache_hitrate_slice_gnu(minhit, maxhit, min_cache, max_cache, slices,algorithm)
