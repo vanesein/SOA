@@ -9,7 +9,7 @@ global name_cache_hitrate_gnu
 global cache_request_gnu
 global name_cache_request_gnu
 
-global real_traces
+global num_lines
 global shuffle_array
 global dic_temporality
 
@@ -40,6 +40,6 @@ results_slices = os.getcwd()+'/results_slices/'
 cache_hitrate_slices_gnu = graphics+'cache_hitrate_slices_'
 
 
-real_traces = []
+num_lines = 0
 shuffle_array = []
 dic_temporality = dict()
